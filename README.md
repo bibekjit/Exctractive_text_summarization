@@ -1,5 +1,5 @@
 # Exctractive text summarization
-Exctractive text summarization is an unsupervised approach that uses LSA (Latent Semmantic Analysis) with SVD (Single Value Decomposition) to determine the importance score of each document (or sentence) with respect to the context. Based on the scores, it picks the top important sentences for the summary.
+Exctractive text summarization is an unsupervised approach that uses LSA (Latent Semmantic Analysis) with SVD (Single Value Decomposition) to determine the importance score of each document (or sentence) with respect to the context. Based on the scores, it picks the top most important sentences for the summary.
 Refer to https://www.researchgate.net/publication/220195824 for detail information
 
 # LSA - Latent Semantic Analysis 
