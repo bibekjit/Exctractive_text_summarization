@@ -14,6 +14,9 @@ def computeSVD(x):
     return u,s,v
 
 def summarizer(FILE_PATH,SUMMARY_SIZE,MODEL_NAME="en_core_web_md"):
+    
+    SUMMARY_SIZE=SUMMARY_SIZE/100
+    
     # load the text file
     with open(FILE_PATH,'r',encoding='utf-8') as f:
         text=f.read().split('\n')
@@ -93,7 +96,7 @@ def summarizer(FILE_PATH,SUMMARY_SIZE,MODEL_NAME="en_core_web_md"):
         i=sent_scores[score]
         summary=summary+" "+doc[i]
 
-    FileName=os.path.basname(FILE_PATH).split('.')[0]
+    FileName=os.path.basename(FILE_PATH).split('.')[0]
     
     with open(FileName+"_summarized.txt","w") as f:
         f.write(summary)
