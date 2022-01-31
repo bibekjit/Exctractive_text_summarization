@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from math import log
 import spacy
+import os
 from numpy.linalg import svd
 
 def computeSVD(x):
@@ -92,8 +93,10 @@ def summarizer(FILE_PATH,SUMMARY_SIZE,MODEL_NAME="en_core_web_md"):
         i=sent_scores[score]
         summary=summary+" "+doc[i]
 
-    with open("summary","w") as f:
-      f.write(summary)
+    FileName=os.path.basname(FILE_PATH).split('.')[0]
+    
+    with open(FileName+"_summarized.txt","w") as f:
+        f.write(summary)
 
 filePath=input("Path to .txt file : ")
 summarySize=float(input("Summary size (percentage): "))
