@@ -22,5 +22,5 @@ Download the spacy model
 2. Type `python summarizer.py`
 3. Enter the file path to the .txt file that contains the text
 4. Provide the size of summary (percentage value)
-5. Summary text file is generated as `<name of the text file>_summarised.txt`
+5. Summary text file is generated as `<name of the text file>_summarised_<summary size>.txt`
 
