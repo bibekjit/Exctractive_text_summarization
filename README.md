@@ -21,6 +21,6 @@ Download the spacy model
 1. Navigate to the repository through command prompt
 2. Type `python summarizer.py`
 3. Enter the file path to the .txt file that contains the text
-4. Provide the size of summary (percentage value)
+4. Provide the size of summary (percentage value). Press enter to use default value (default value = 40)
 5. Summary text file is generated as `<name of the text file>_summarised_<summary size>.txt`
 
