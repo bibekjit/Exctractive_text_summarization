@@ -4,8 +4,21 @@ from math import log
 import spacy
 import os
 from numpy.linalg import svd
+pd.options.mode.chained_assignment = None
+
+MODEL_NAME="en_core_web_md"
+
+FILE_PATH=input("Path to .txt file : ")
+SUMMARY_SIZE=input("Summary size (percentage): ")
 
 def computeSVD(x):
+    """
+    Computes the SVD of the given matrix
+    AV=US
+    
+    :param x: numpy array
+    :return: U,S,V.T
+    """
     u,s,v=svd(x)
     e=list(s)
     s=np.zeros(x.shape)
@@ -13,12 +26,25 @@ def computeSVD(x):
         s[i][i]=e[i]
     return u,s,v
 
-def summarizer(FILE_PATH,SUMMARY_SIZE,MODEL_NAME="en_core_web_md"):
+def summarizer(filePath,summarySize):
+    """
+    Creates the summary of the given text
+
+    :param filePath: path to .txt file
+    :param summarySize: desired summary size (percent of original text)
+                        default size = 40
+
+    :return: creates a .txt file
+    """
+    global MODEL_NAME
     
-    SUMMARY_SIZE=SUMMARY_SIZE/100
+    if summarySize=='':
+        summarySize=0.4
+    else:
+        summarySize=int(summarySize)/100
     
     # load the text file
-    with open(FILE_PATH,'r',encoding='utf-8') as f:
+    with open(filePath,'r',encoding='utf-8') as f:
         text=f.read().split('\n')
         text=' '.join(text).strip()
 
@@ -87,7 +113,7 @@ def summarizer(FILE_PATH,SUMMARY_SIZE,MODEL_NAME="en_core_web_md"):
     sent_scores={}
     for i in range(len(v)):
         sent_scores[sum(v[i])]=i
-    num=int(np.round(len(doc)*SUMMARY_SIZE))      
+    num=int(np.round(len(doc)*summarySize))      
     top=sorted(list(sent_scores))[-num:]
 
     # print the summary
@@ -95,14 +121,13 @@ def summarizer(FILE_PATH,SUMMARY_SIZE,MODEL_NAME="en_core_web_md"):
     for score in top:
         i=sent_scores[score]
         summary=summary+" "+doc[i]
+    summary=summary.strip()
 
-    FileName=os.path.basename(FILE_PATH).split('.')[0]
+    FileName=os.path.basename(filePath).split('.')[0]
     
     with open(FileName+"_summarized.txt","w") as f:
         f.write(summary)
+        
+    print("\nSummary created !!")
 
-filePath=input("Path to .txt file : ")
-summarySize=float(input("Summary size (percentage): "))
-
-summarizer(filePath,summarySize)
-
+summarizer(FILE_PATH,SUMMARY_SIZE)
