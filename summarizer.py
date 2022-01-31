@@ -123,9 +123,10 @@ def summarizer(filePath,summarySize):
         summary=summary+" "+doc[i]
     summary=summary.strip()
 
-    FileName=os.path.basename(filePath).split('.')[0]
+    filename=os.path.basename(filePath).split('.')[0]
+    output_file_name=filename+'_summarized_'+str(int(summarySize*100))+".txt"
     
-    with open(FileName+"_summarized.txt","w") as f:
+    with open(output_file_name,"w") as f:
         f.write(summary)
         
     print("\nSummary created !!")
