@@ -32,7 +32,7 @@ def text_to_sentences(text):
     for w in text.split():
 
         sent = sent + " " + w
-        if (w[-1] == '.') and (not w[-2].isupper() or w.isupper()):
+        if (w[-1] == '.') and (not w[-2].isupper()):
             docs.append(sent.strip())
             sent_tokens = model(sent)
             sent_tokens = [str(t.lemma_).lower() for t in sent_tokens if not t.is_punct]
@@ -95,7 +95,7 @@ def main(file_path, summary_size):
         text = ' '.join(text).strip()
 
     if summary_size == "":
-        summary_size = 0.6
+        summary_size = 0.4
     else: summary_size = int(summary_size)/100
     tokens = text_to_tokens(text)
     sentences = text_to_sentences(text)
